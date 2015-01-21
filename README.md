@@ -1,7 +1,7 @@
-AuthenticateJS
+ngEasyAuth
 =============
 
-AuthenticateJS is a simple angular library for handling security
+ngEasyAuth is a simple angular library for handling security
 
 Installation
 ------------
