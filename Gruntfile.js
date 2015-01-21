@@ -19,7 +19,7 @@ module.exports = function(grunt) {
                     'src/js/module.js',
                     'src/js/**/*.js'
                 ],
-                dest: 'build/authenticate.js'
+                dest: 'build/angular-easy-auth.js'
             }
         },
 
