@@ -23,17 +23,18 @@ angular.module('ngEasyAuth', ['ngRoute'])
 
         var config = {
             host: '/',
-            loginUrl: 'login',
-            logoutUrl: 'logout',
-            loggedinUrl: 'loggedin',
+            loginUrl: 'login.json',
+            logoutUrl: false,
+            loggedinUrl: 'users/current.json',
 
-            unauthorizedPage: '/unauthorized',
+            unauthorizedPage: '/login',
             targetPage: '/',
             loginPage: '/login'
         };
 
-        this.setConfig = function (configuration) {
-            config = configuration;
+        this.set = function (key, value) {
+            config[key] = value;
+            return this;
         };
 
         this.$get = ['$http', '$q', '$rootScope', function ($http, $q, $rootScope) {
