@@ -10,7 +10,6 @@
   "main": "src/ngEasyAuth.js",
   "ignore": [
     "**/.*",
-    "src",
     "Gruntfile.js",
     "package.json"
   ],
