@@ -1,13 +1,13 @@
 {
   "name": "angular-easy-auth",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "authors": [
     "Anton Pisarenko <antpisar@gmail.com>",
     "Riad Benguella <benguella@gmail.com>"
   ],
   "description": "A simple security library for angularjs",
   "license": "MIT",
-  "main": "build/angular-easy-auth.js",
+  "main": "src/ngEasyAuth.js",
   "ignore": [
     "**/.*",
     "src",
