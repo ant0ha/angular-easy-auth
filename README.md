@@ -45,7 +45,7 @@ angular.module('myapp').config(['EasyAuthProvider', function (EasyAuthProvider) 
 All params and default values you can see below:
 
 Param               | Default value
------------------------------------
+------------------- | -------------
 host                | 'api/'
 loginUrl            | 'login.json'
 logoutUrl           | false
