@@ -2,22 +2,6 @@
 
 angular.module('ngEasyAuth', ['ngRoute'])
 
-    // Run block
-    .run(['$rootScope', '$location', 'EasyAuth', 'Referer',
-        function ($rootScope, $location, EasyAuth, Referer) {
-            $rootScope.$on("$routeChangeStart", function (event, next) {
-                if ( ! EasyAuth.authorize(next.security)) {
-                    if (EasyAuth.isLoggedIn()) {
-                        $location.path(EasyAuth.unauthorizedPage);
-                    } else {
-                        Referer.set($location.url());
-                        $location.path(EasyAuth.loginPage);
-                    }
-                }
-            });
-        }
-    ])
-
     // Main service
     .provider('EasyAuth', function () {
 
@@ -170,7 +154,7 @@ angular.module('ngEasyAuth', ['ngRoute'])
                 }],
 
             templateUrl: function(element, attr) {
-                return attr.templateUrl ? attr.templateUrl : 'partials/authenticateJS/login.html';
+                return attr.templateUrl ? attr.templateUrl : 'partials/login.html';
             }
         };
     })
@@ -199,4 +183,33 @@ angular.module('ngEasyAuth', ['ngRoute'])
         };
 
     })
+
+    // Check auth on route change
+    .run(['$rootScope', '$location', 'EasyAuth', 'Referer',
+        function ($rootScope, $location, EasyAuth, Referer) {
+            $rootScope.$on("$routeChangeStart", function (event, next) {
+                if ( ! EasyAuth.authorize(next.security)) {
+                    if (EasyAuth.isLoggedIn()) {
+                        $location.path(EasyAuth.unauthorizedPage);
+                    } else {
+                        Referer.set($location.url());
+                        $location.path(EasyAuth.loginPage);
+                    }
+                }
+            });
+        }
+    ])
+
+    // Directive's template
+    .run(['$templateCache', function ($templateCache) {
+        $templateCache.put('partials/login.html',
+            "<form class=\"login-form\" ng-show=\"ready\" ng-submit=\"submit()\">" +
+            "<div class=\"alert alert-error\" ng-show=\"error\">" +
+            "Check your username or password" +
+            "</div>" +
+            "<input type=\"text\" placeholder=\"Username\" ng-model=\"username\" />" +
+            "<input type=\"password\" placeholder=\"Password\" ng-model=\"password\" />" +
+            "<input type=\"submit\" value=\"Login\" />" +
+            "</form>");
+    }])
 ;
