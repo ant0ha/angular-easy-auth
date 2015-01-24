@@ -2,6 +2,7 @@ ngEasyAuth
 =============
 
 ngEasyAuth is a simple angular library for handling security
+(fork of [authenticateJS](https://github.com/youknowriad/authenticate.js))
 
 Installation
 ------------
@@ -11,7 +12,7 @@ To use this library you should have a server application that handles authentica
  * Install the library
 
 ```bash
-bower install authenticateJS
+bower install angular-easy-auth
 ```
 
  * load the library
@@ -19,34 +20,39 @@ bower install authenticateJS
 ```html
 <script src="js/angular.min.js"></script>
 <script src="js/angular-route.min.js"></script>
-<script src="js/authenticate.js"></script>
+<script src="js/angular-easy-auth.js"></script>
 ```
- * copy the library partials to your public directory to the folder partials/authenticateJS
 
  * add it to your dependencies
 
 ```javascript
-angular.module('myapp', ['authenticate.js']);
+angular.module('myapp', ['ngEasyAuth']);
 ```
 
  * configure
 
 ```javascript
-angular.module('myapp').config(['AuthenticateJSProvider', function (AuthenticateJSProvider) {
+angular.module('myapp').config(['EasyAuthProvider', function (EasyAuthProvider) {
 
-    AuthenticateJSProvider.setConfig({
-        host: 'api/',                  // your base api url
-        loginUrl: 'auth/login',        // login api url
-        logoutUrl: 'auth/logout',      // logout api url
-        loggedinUrl: 'auth/loggedin',  // api to get the user profile and roles
-
-        unauthorizedPage: '/unauthorized',  // url (frontend) of the unauthorized page
-        targetPage: '/dashboard',           // url (frontend) of the target page on login success
-        loginPage: '/login'                 // url (frontend) of the login page
-    });
+    EasyAuthProvider
+        .set('host', 'api/')
+        .set('loginUrl', 'login.json')
+    ;
 
 }]);
 ```
+
+All params and default values you can see below:
+
+Param               | Default value
+-----------------------------------
+host                | 'api/'
+loginUrl            | 'login.json'
+logoutUrl           | false
+loggedinUrl         | 'users/current.json'
+unauthorizedPage    | '/login'
+targetPage          | '/'
+loginPage           | '/login'
 
 Usage
 -----
@@ -54,12 +60,12 @@ Usage
  * In your login page, include the login form like this
 
 ```html
-<div authenticate-login-form></div>
+<div easy-auth-form></div>
 ```
 You can override the default login form template like this
 
 ```html
-<div authenticate-login-form template-url="mypartial.html"></div>
+<div easy-auth-form template-url="mypartial.html"></div>
 ```
 
  * add a security attribute to your routes
@@ -67,6 +73,6 @@ You can override the default login form template like this
      * a true value means, you have to be loggedin to access this route,
      * other custom string can be used to indicate that a user role is required to access this route (the string represent the role that have to be found in user.roles)
 
-* you can call AuthenticateJS.logout(); to loggout
+* you can call EasyAuth.logout(); to loggout
 
-* you cas use AuthenticateJS.getLoggedinUser() to get the current loggedin user
+* you cas use EasyAuth.getLoggedinUser() to get the current loggedin user
