@@ -99,9 +99,7 @@ angular.module('ngEasyAuth', ['ngRoute'])
                             $rootScope.$broadcast('EasyAuth.login', user);
                         }
                     }).error(function () {
-                        if (user !== null) {
-                            $rootScope.$broadcast('EasyAuth.logout');
-                        }
+                        $rootScope.$broadcast('EasyAuth.logout');
                         user = null;
                         defer.reject();
                     });
