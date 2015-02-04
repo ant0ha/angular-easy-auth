@@ -56,13 +56,16 @@ angular.module('ngEasyAuth', [])
 
                 login: function (username, password) {
                     var defer = $q.defer();
+
+                    var data = {};
+
+                    data[config.usernameField] = username;
+                    data[config.passwordField] = password;
+
                     $http({
                         url: config.host + config.loginUrl,
                         method: 'POST',
-                        data: {
-                            username: config.usernameField,
-                            password: config.passwordField
-                        }
+                        data: data
                     }).success(function (data) {
                         user = data;
                         lastUser = data;
