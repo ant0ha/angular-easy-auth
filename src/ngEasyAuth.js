@@ -13,7 +13,10 @@ angular.module('ngEasyAuth', [])
 
             unauthorizedPage: '/login',
             targetPage: '/',
-            loginPage: '/login'
+            loginPage: '/login',
+
+            usernameField: 'username',
+            passwordField: 'password'
         };
 
         this.set = function (key, value) {
@@ -57,8 +60,8 @@ angular.module('ngEasyAuth', [])
                         url: config.host + config.loginUrl,
                         method: 'POST',
                         data: {
-                            username: username,
-                            password: password
+                            username: config.usernameField,
+                            password: config.passwordField
                         }
                     }).success(function (data) {
                         user = data;
