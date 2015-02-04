@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ngEasyAuth', ['ngRoute'])
+angular.module('ngEasyAuth', [])
 
     // Main service
     .provider('EasyAuth', function () {
