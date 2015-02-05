@@ -79,16 +79,20 @@ angular.module('ngEasyAuth', [])
                 },
 
                 logout: function () {
-                    var defer = $q.defer();
-                    $http.get(config.host + config.logoutUrl).success(function () {
-                        user = null;
-                        defer.resolve();
-                        $rootScope.$broadcast('EasyAuth.logout');
-                    }).error(function () {
-                        defer.reject();
-                    });
+                    if (config.logoutUrl) {
+                        var defer = $q.defer();
+                        $http.get(config.host + config.logoutUrl).success(function () {
+                            user = null;
+                            defer.resolve();
+                            $rootScope.$broadcast('EasyAuth.logout');
+                        }).error(function () {
+                            defer.reject();
+                        });
 
-                    return defer.promise;
+                        return defer.promise;
+                    } else {
+                        $rootScope.$broadcast('EasyAuth.logout');
+                    }
                 },
 
                 check: function () {
