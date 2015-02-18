@@ -16,7 +16,9 @@ angular.module('ngEasyAuth', [])
             loginPage: '/login',
 
             usernameField: 'username',
-            passwordField: 'password'
+            passwordField: 'password',
+            
+            router: 'ngRoute'
         };
 
         this.set = function (key, value) {
@@ -34,6 +36,7 @@ angular.module('ngEasyAuth', [])
                 targetPage: config.targetPage,
                 loginPage: config.loginPage,
                 unauthorizedPage: config.unauthorizedPage,
+                router: config.router,
 
                 getUser: function () {
                     return user;
@@ -195,7 +198,14 @@ angular.module('ngEasyAuth', [])
     // Check auth on route change
     .run(['$rootScope', '$location', 'EasyAuth', 'Referer',
         function ($rootScope, $location, EasyAuth, Referer) {
-            $rootScope.$on("$routeChangeStart", function (event, next) {
+            
+            if (EasyAuth.router == 'ui.router') {
+                var event = '$stateChangeStart';
+            } else {
+                var event = '$routeChangeStart';
+            }
+            
+            $rootScope.$on(event, function (event, next) {
                 if ( ! EasyAuth.authorize(next.security)) {
                     if (EasyAuth.isLoggedIn()) {
                         $location.path(EasyAuth.unauthorizedPage);
