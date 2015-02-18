@@ -53,6 +53,7 @@ loggedinUrl         | 'users/current.json'
 unauthorizedPage    | '/login'
 targetPage          | '/'
 loginPage           | '/login'
+router              | 'ngRoute'
 
 Usage
 -----
