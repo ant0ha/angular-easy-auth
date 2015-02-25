@@ -9,6 +9,7 @@ angular.module('ngEasyAuth', [])
             host: '/',
             loginUrl: 'login.json',
             logoutUrl: false,
+            logoutMethod: 'DELETE',
             loggedinUrl: 'users/current.json',
 
             unauthorizedPage: '/login',
@@ -84,7 +85,11 @@ angular.module('ngEasyAuth', [])
                 logout: function () {
                     if (config.logoutUrl) {
                         var defer = $q.defer();
-                        $http.get(config.host + config.logoutUrl).success(function () {
+                        
+                        $http({
+                            url: config.host + config.logoutUrl,
+                            method: config.logoutMethod
+                        }).success(function () {
                             user = null;
                             defer.resolve();
                             $rootScope.$broadcast('EasyAuth.logout');

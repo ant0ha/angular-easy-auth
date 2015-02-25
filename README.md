@@ -49,6 +49,7 @@ Param               | Default value
 host                | 'api/'
 loginUrl            | 'login.json'
 logoutUrl           | false
+logoutMethod        | 'DELETE'
 loggedinUrl         | 'users/current.json'
 unauthorizedPage    | '/login'
 targetPage          | '/'
