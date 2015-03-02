@@ -105,6 +105,7 @@ angular.module('ngEasyAuth', [])
 
                 check: function () {
                     var defer = $q.defer();
+                    
                     $http({
                         url: config.host + config.loggedinUrl,
                         method: 'GET'
@@ -113,11 +114,16 @@ angular.module('ngEasyAuth', [])
                         user = data;
                         lastUser = data;
                         defer.resolve(user);
-                        if (!angular.equals(previous, user)) {
+                        
+                        if ( ! angular.equals(previous, user)) {
                             $rootScope.$broadcast('EasyAuth.login', user);
                         }
-                    }).error(function () {
-                        $rootScope.$broadcast('EasyAuth.logout');
+                        
+                    }).error(function (res) {
+                        if (res.status == 401) {
+                            $rootScope.$broadcast('EasyAuth.logout');
+                        }
+                        
                         user = null;
                         defer.reject();
                     });
