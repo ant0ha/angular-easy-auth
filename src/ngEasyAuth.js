@@ -120,7 +120,7 @@ angular.module('ngEasyAuth', [])
                         }
                         
                     }).error(function (res) {
-                        if (res.status == 401) {
+                        if (res.status == 401 || res.status == 403) {
                             $rootScope.$broadcast('EasyAuth.logout');
                         }
                         
